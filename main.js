@@ -2,61 +2,103 @@ let canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 const maxCW = 300;
 const maxCH = 150;
+// const mouse = {
+//     x: undefined,
+//     y: undefined
+// }
 //x y width height
 
 
 //Class File
-//Mouse events
+
+
+
+//Colour Theme
+let colorArray = [
+    '#F0F7EE',
+    '#C4D7F2',
+    '#AFDEDC',
+    '#91A8A4',
+    '#000000'
+];
 //Circle Class
 //=====================================================================================
+function Circle(x, y, dx, dy, radius) {
+    this.x = x;
+    this.y = y;
+    this.dx = dx;
+    this.dy = dy;
+    this.radius = radius;
+    this.minRadius = radius;
+    this.color = colorArray[Math.floor(Math.random() * colorArray.length)];;
+
+    this.draw = function () {
+        c.beginPath();
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        //c.strokeStyle = "red";
+        c.fillStyle = this.color;
+        c.fill();
+
+    } // close draw function
+    this.update = function () {
+        if (this.x + this.radius > maxCW || this.x - this.radius < 40) {
+            this.dx = -this.dx;
+
+        }
+        //Collision fun Y
+        if (this.y + this.radius > maxCH || this.y - this.radius < 0) {
+            this.dy = -this.dy;
+        }
+        this.x += this.dx;
+        this.y += this.dy;
+        this.draw();
+
+        // //interactivity This is how big ur mouse interaction is.
+        // if (mouse.x - this.x < 70 && mouse.x - this.x > -70 && mouse.y - this.y < 70 && mouse.y - this.y > -70 && this.radius < maxRadius) {
+        //     this.radius += 1;
+        //}
+        // if (this.radius < 40) {
+        //     this.radius += 1; // 
+        // } // This broke I found a fix though
+        // else if (this.radius > this.minRadius) {
+        //     this.radius -= 1;
+        // }
+
+    } // Close update function
+} // Close Class
+
 //if radius = circle Size. maxCH/maxCW - (radius-4)
 //=====================================================================================
 
 // Function to define Circle variables
 // =====================================================================================
-// x y radius, angle start, angle end  width height 0 300, 0  150
-// for (let i = 0; i < 10; i++) {
-//     let radius = Math.random() * 10;
-//     //BLOCKER - Can't get circles to spawn between two points//specifically certain locations
-//     let x = 40 + radius + Math.random() * (maxCW - radius);
-//     //let xx = -40 + radius + Math.random() * (maxCW - radius);
-//     let y = Math.random() * (maxCH - radius);
-//     c.beginPath();
-//     c.arc(x, y, radius, 0, Math.PI * 2, false);
-//     c.strokeStyle = 'blue';
-//     c.stroke();
-// }
+const circleArray = []
+function init() {
+    for (var i = 0; i < 100; i++) {
+        var radius = Math.random() * 10 + 1;  // Get a random 0-3 then add 1
+        var x = 40 + Math.random() * (maxCW - radius * 1) + radius;
+        var y = 00 + Math.random() * (maxCH - radius * 1) + radius;
+        var dx = Math.random() - 0.5 * 2; // Velocity which is the amount of pixels per movement
+        var dy = Math.random() - 0.5 * 4;
+        circleArray.push(new Circle(x, y, dx, dy, radius));
 
 
-
-
-let radius = Math.random() * 10;
-let y = Math.random() * (maxCH - radius);
-let x = 40 + radius + Math.random() * (maxCW - radius);
-let dx = 2;
-let dy = 4;
-
-function cAnimation() {
-    requestAnimationFrame(cAnimation);
-    c.clearRect(0, 0, maxCW, maxCH);
-    c.beginPath();
-    c.arc(x, y, radius, 0, Math.PI * 2, false); // Create Circle
-    c.strokeStyle = 'blue'; //Colour circle border
-    c.stroke(); // Display
-    sqPosition(); // 
-
-    x++;
-    x += dx; // Move from left to right
-    y += dy;// This is different to the video, in the video it displays this after the if statements
-    if (x + radius > maxCW || x - radius < 40) {
-        dx = -dx;
-    }
-    if (y + radius > maxCH || y - radius < 0) {
-        dy = -dy;
     }
 
 }
-cAnimation();
+
+function animate() {
+    requestAnimationFrame(animate);
+    c.clearRect(0, 0, maxCW, maxCH); // Refresh page
+    sqPosition();
+    for (var i = 0; i < circleArray.length; i++) {
+        circleArray[i].update();
+        sqPosition();
+
+    }
+}
+init();
+animate();
 
 
 
@@ -147,8 +189,8 @@ function sqPosition() {
 
     //Left
     c.beginPath();
-    c.moveTo(272, 85);
-    c.lineTo(272, 55);
+    c.moveTo(272, 0);
+    c.lineTo(272, maxCH);
     c.strokeStyle = "orange"
     c.stroke();
 
