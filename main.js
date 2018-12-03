@@ -74,7 +74,7 @@ function Circle(x, y, dx, dy, radius) {
 // =====================================================================================
 const circleArray = []
 function init() {
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 1; i++) {
         var radius = Math.random() * 10 + 1;  // Get a random 0-3 then add 1
         var x = 40 + Math.random() * (maxCW - radius * 1) + radius;
         var y = 00 + Math.random() * (maxCH - radius * 1) + radius;
@@ -166,26 +166,6 @@ function sqPosition() {
     c.fillRect(275, 60, 20, 20);
 
     //End Position Box
-    //top
-    c.beginPath();
-    c.moveTo(271, 55);
-    c.lineTo(299, 55);
-    c.strokeStyle = "orange"
-    c.stroke();
-
-    //Right
-    c.beginPath();
-    c.moveTo(298, 85);
-    c.lineTo(298, 55);
-    c.strokeStyle = "orange"
-    c.stroke();
-
-    //Bottom
-    c.beginPath();
-    c.moveTo(271, 85);
-    c.lineTo(299, 85);
-    c.strokeStyle = "orange"
-    c.stroke();
 
     //Left
     c.beginPath();
