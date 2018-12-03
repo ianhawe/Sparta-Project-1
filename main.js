@@ -41,7 +41,7 @@ function Circle(x, y, dx, dy, radius) {
 
     } // close draw function
     this.update = function () {
-        if (this.x + this.radius > maxCW || this.x - this.radius < 40) {
+        if (this.x + this.radius > maxCW - 28 || this.x - this.radius < 40) {
             this.dx = -this.dx;
 
         }
@@ -58,11 +58,12 @@ function Circle(x, y, dx, dy, radius) {
 const circleArray = []
 function init() {
     for (var i = 0; i < 1; i++) {
-        var radius = Math.random() * 10 + 1;  // Get a random 0-3 then add 1
-        var x = 40 + Math.random() * (maxCW - radius * 1) + radius;
-        var y = 00 + Math.random() * (maxCH - radius * 1) + radius;
-        var dx = Math.random() - 0.5 * 2; // Velocity which is the amount of pixels per movement
-        var dy = Math.random() - 0.5 * 4;
+        let radius = Math.random() * 10 + 1;  // Get a random 0-3 then add 1
+        //var x = 40 + Math.random() * (maxCW - radius * 1) + radius;
+        let x = 40 + radius + Math.random() * (maxCW - radius);
+        var y = Math.random() * (maxCH - radius * 1) + radius;
+        var dx = Math.random() - 0.5 * 6; // Velocity which is the amount of pixels per movement
+        var dy = Math.random() - 0.5 * 6;
         circleArray.push(new Circle(x, y, dx, dy, radius));
     }
 }
