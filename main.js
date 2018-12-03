@@ -52,26 +52,9 @@ function Circle(x, y, dx, dy, radius) {
         this.x += this.dx;
         this.y += this.dy;
         this.draw();
-
-        // //interactivity This is how big ur mouse interaction is.
-        // if (mouse.x - this.x < 70 && mouse.x - this.x > -70 && mouse.y - this.y < 70 && mouse.y - this.y > -70 && this.radius < maxRadius) {
-        //     this.radius += 1;
-        //}
-        // if (this.radius < 40) {
-        //     this.radius += 1; // 
-        // } // This broke I found a fix though
-        // else if (this.radius > this.minRadius) {
-        //     this.radius -= 1;
-        // }
-
     } // Close update function
 } // Close Class
 
-//if radius = circle Size. maxCH/maxCW - (radius-4)
-//=====================================================================================
-
-// Function to define Circle variables
-// =====================================================================================
 const circleArray = []
 function init() {
     for (var i = 0; i < 1; i++) {
@@ -81,10 +64,7 @@ function init() {
         var dx = Math.random() - 0.5 * 2; // Velocity which is the amount of pixels per movement
         var dy = Math.random() - 0.5 * 4;
         circleArray.push(new Circle(x, y, dx, dy, radius));
-
-
     }
-
 }
 
 function animate() {
@@ -94,7 +74,6 @@ function animate() {
     for (var i = 0; i < circleArray.length; i++) {
         circleArray[i].update();
         sqPosition();
-
     }
 }
 init();
