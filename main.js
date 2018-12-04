@@ -57,10 +57,10 @@ function Circle(x, y, dx, dy, radius) {
 
 const circleArray = []
 function init() {
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < 3; i++) {
         let radius = Math.random() * 10 + 1;  // Get a random 0-3 then add 1
         //var x = 40 + Math.random() * (maxCW - radius * 1) + radius;
-        let x = 40 + radius + Math.random() * (maxCW - radius);
+        let x = Math.round(Math.random() * 220) + radius + 40; // between two numbers 40 - 272 
         var y = Math.random() * (maxCH - radius * 1) + radius;
         var dx = Math.random() - 0.5 * 6; // Velocity which is the amount of pixels per movement
         var dy = Math.random() - 0.5 * 6;
@@ -75,6 +75,8 @@ function animate() {
     for (var i = 0; i < circleArray.length; i++) {
         circleArray[i].update();
         sqPosition();
+        player();
+
     }
 }
 init();
@@ -130,10 +132,6 @@ function sqPosition() {
     c.strokeStyle = "yellow"
     c.stroke();
 
-    //Start Square Position (Random)
-    c.fillStyle = 'rgba(255, 0, 0, 0.5)';
-    c.fillRect(10, 60, 20, 20);
-
     //Start Line
     c.beginPath();
     c.moveTo(40, 149);
@@ -153,9 +151,37 @@ function sqPosition() {
     c.lineTo(272, maxCH);
     c.strokeStyle = "orange"
     c.stroke();
-
 }
 //Player Control Area
+
+//Start Square Position (Random)
+function player() {
+    c.fillStyle = 'rgba(255, 0, 0, 0.5)';
+    c.fillRect(10, 60, 20, 20);
+}
+//Random Controls //down = , left = 37, right = 39, up = 38;
+player.addEventListener('keydown', function (e) {
+    let keyPressed = String.fromCharCode(event.keyCode);
+    if (keyPressed == w) {
+        object.y - 8;
+    }
+    else if (keyPressed == a) {
+        object.x - 8;
+    }
+    else if (keyPressed == s) {
+        object.y + 8;
+    }
+    else if (keyPressed == d) {
+        object.x + 8;
+    }
+});
+
+c.stroke();
+function move(e) {
+    alert(e.keyCode);
+}
+move();
+document.onkeydown = move;
 
 //=====================================================================================
 
