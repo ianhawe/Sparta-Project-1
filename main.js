@@ -7,12 +7,7 @@ const maxCH = 150;
 //     y: undefined
 // }
 //x y width height
-
-
 //Class File
-
-
-
 //Colour Theme
 let colorArray = [
     '#F0F7EE',
@@ -21,6 +16,7 @@ let colorArray = [
     '#91A8A4',
     '#000000'
 ];
+
 //Circle Class
 //=====================================================================================
 function Circle(x, y, dx, dy, radius) {
@@ -29,8 +25,7 @@ function Circle(x, y, dx, dy, radius) {
     this.dx = dx;
     this.dy = dy;
     this.radius = radius;
-    this.minRadius = radius;
-    this.color = colorArray[Math.floor(Math.random() * colorArray.length)];;
+    this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
 
     this.draw = function () {
         c.beginPath();
@@ -55,37 +50,29 @@ function Circle(x, y, dx, dy, radius) {
     } // Close update function
 } // Close Class
 
-const circleArray = []
-function init() {
-    for (var i = 0; i < 3; i++) {
+const circleArray = [];
+function initCircle() {
+    for (let i = 0; i < 3; i++) {
         let radius = Math.random() * 10 + 1;  // Get a random 0-3 then add 1
         //var x = 40 + Math.random() * (maxCW - radius * 1) + radius;
         let x = Math.round(Math.random() * 220) + radius + 40; // between two numbers 40 - 272 
-        var y = Math.random() * (maxCH - radius * 1) + radius;
-        var dx = Math.random() - 0.5 * 6; // Velocity which is the amount of pixels per movement
-        var dy = Math.random() - 0.5 * 6;
+        let y = Math.random() * (maxCH - radius * 1) + radius;
+        let dx = Math.random() - 0.5 * 6; // Velocity which is the amount of pixels per movement
+        let dy = Math.random() - 0.5 * 6;
         circleArray.push(new Circle(x, y, dx, dy, radius));
     }
 }
-
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, maxCW, maxCH); // Refresh page
-    sqPosition();
-    for (var i = 0; i < circleArray.length; i++) {
-        circleArray[i].update();
-        sqPosition();
-        player();
+    linePosition();
+    Square(200, 75, 20, 20);
 
+    for (let i = 0; i < circleArray.length; i++) {
+        circleArray[i].update();
     }
 }
-init();
-animate();
-
-
-
 //=====================================================================================
-
 //Animate Circle Properties
 //=====================================================================================
 //Random Position Setting of Circles
@@ -95,18 +82,30 @@ animate();
 
 //Square Class
 //=====================================================================================
+function Square(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
+    this.draw = function () {
+        c.fillStyle = this.color;
+        c.fillRect(this.x, this.y, this.width, this.height);
+    }
+}
 //=====================================================================================
 
 //Other Square Propperties
 //=====================================================================================
+// c.fillStyle = 'rgba(0, 0, 255, 0.5)';
+// c.fillRect(275, 60, 20, 20);
 
-//This is to know the height width of the Rectangle we're in
+//Pitch layout
+function linePosition() {
 
-//border of game
-//Verticle left, right
-
-
-function sqPosition() {
+    //Start Lines
+    //===================================================================================================
+    //===================================================================================================
     c.beginPath();
     c.moveTo(0, maxCH);
     c.lineTo(0, 0);
@@ -139,12 +138,6 @@ function sqPosition() {
     c.strokeStyle = "#00ff00"
     c.stroke();
 
-    //End Square Position (Random)
-    c.fillStyle = 'rgba(0, 0, 255, 0.5)';
-    c.fillRect(275, 60, 20, 20);
-
-    //End Position Box
-
     //Left
     c.beginPath();
     c.moveTo(272, 0);
@@ -152,36 +145,41 @@ function sqPosition() {
     c.strokeStyle = "orange"
     c.stroke();
 }
-//Player Control Area
+//===================================================================================================
+//===================================================================================================
 
-//Start Square Position (Random)
-function player() {
-    c.fillStyle = 'rgba(255, 0, 0, 0.5)';
-    c.fillRect(10, 60, 20, 20);
-}
-//Random Controls //down = , left = 37, right = 39, up = 38;
-player.addEventListener('keydown', function (e) {
-    let keyPressed = String.fromCharCode(event.keyCode);
-    if (keyPressed == w) {
-        object.y - 8;
+
+//Random Controls //down = 40, left = 37, right = 39, up = 38;
+
+
+window.addEventListener("keydown", function (e) {
+    let keyPressed = e.keyCode || e.which;
+
+    //left
+    if (keyPressed == 37) {
+        this.alert("i pressed the left key");
+
     }
-    else if (keyPressed == a) {
-        object.x - 8;
+    //up
+    else if (keyPressed == 38) {
+        this.alert("i pressed the up key");
     }
-    else if (keyPressed == s) {
-        object.y + 8;
+    //right
+    else if (keyPressed == 39) {
+        this.alert("I pressed right key");
     }
-    else if (keyPressed == d) {
-        object.x + 8;
+    //down
+    else if (keyPressed == 40) {
+        this.alert("I pressed down key");
     }
+
+    // Extra Combitions of the keys pressed
+    //up + down, left + right, up+left, up+right, down+left, down+right
+
 });
 
-c.stroke();
-function move(e) {
-    alert(e.keyCode);
-}
-move();
-document.onkeydown = move;
+
+
 
 //=====================================================================================
 
@@ -199,3 +197,7 @@ document.onkeydown = move;
 // Colour theme change
 
 //Run circles and balls
+
+
+initCircle();
+animate();
