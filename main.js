@@ -52,26 +52,37 @@ function Circle(x, y, dx, dy, radius) {
 
 const circleArray = [];
 function initCircle() {
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 2; i++) {
         let radius = Math.random() * 10 + 1;  // Get a random 0-3 then add 1
         //var x = 40 + Math.random() * (maxCW - radius * 1) + radius;
         let x = Math.round(Math.random() * 220) + radius + 40; // between two numbers 40 - 272 
-        let y = Math.random() * (maxCH - radius * 1) + radius;
+        let y = Math.round(Math.random() * maxCH - 30) + 20;
         let dx = Math.random() - 0.5 * 6; // Velocity which is the amount of pixels per movement
         let dy = Math.random() - 0.5 * 6;
         circleArray.push(new Circle(x, y, dx, dy, radius));
     }
 }
+function getDistance(x1, y1, x2, y2) {
+    let xDistance = x2 - x1;
+    let yDistance = y2 - y1;
+    return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+
+}
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, maxCW, maxCH); // Refresh page
     linePosition();
-    Square(200, 75, 20, 20);
-
     for (let i = 0; i < circleArray.length; i++) {
         circleArray[i].update();
     }
+
+    //Detecting between two circles
+    if (getDistance(circleArray[0].x, circleArray[0].y, circleArray[1].x, circleArray[1].y) < circleArray[0].radius + circleArray[1].radius - 2) {
+        circleArray[0].color = 'red';
+        // alert("circles touched");
+    }
 }
+
 //=====================================================================================
 //Animate Circle Properties
 //=====================================================================================
@@ -93,12 +104,12 @@ function Square(x, y, width, height) {
         c.fillRect(this.x, this.y, this.width, this.height);
     }
 }
+
 //=====================================================================================
 
 //Other Square Propperties
 //=====================================================================================
-// c.fillStyle = 'rgba(0, 0, 255, 0.5)';
-// c.fillRect(275, 60, 20, 20);
+
 
 //Pitch layout
 function linePosition() {
@@ -106,6 +117,15 @@ function linePosition() {
     //Start Lines
     //===================================================================================================
     //===================================================================================================
+
+    //Start Square Position (Random)
+    this.startSq
+    c.fillStyle = 'rgba(255, 0, 0, 0.5)';
+    c.fillRect(10, 60, 20, 20);
+
+    c.fillStyle = 'rgba(0, 0, 255, 0.5)';
+    c.fillRect(275, 60, 20, 20);
+
     c.beginPath();
     c.moveTo(0, maxCH);
     c.lineTo(0, 0);
@@ -144,37 +164,58 @@ function linePosition() {
     c.lineTo(272, maxCH);
     c.strokeStyle = "orange"
     c.stroke();
+
 }
 //===================================================================================================
 //===================================================================================================
 
 
 //Random Controls //down = 40, left = 37, right = 39, up = 38;
-
-
 window.addEventListener("keydown", function (e) {
     let keyPressed = e.keyCode || e.which;
 
     //left
     if (keyPressed == 37) {
-        this.alert("i pressed the left key");
+        console.log("i pressed the left key");
 
     }
     //up
     else if (keyPressed == 38) {
-        this.alert("i pressed the up key");
+        console.log("i pressed the up key");
     }
     //right
     else if (keyPressed == 39) {
-        this.alert("I pressed right key");
+        console.log("I pressed right key");
     }
     //down
     else if (keyPressed == 40) {
-        this.alert("I pressed down key");
+        console.log("I pressed down key");
     }
 
     // Extra Combitions of the keys pressed
     //up + down, left + right, up+left, up+right, down+left, down+right
+
+});
+
+window.addEventListener("keyup", function (e) {
+    let keyReleased = e.keyCode || e.which;
+    //left
+    if (keyReleased == 37) {
+        console.log("i released the left key");
+
+    }
+    //up
+    else if (keyReleased == 38) {
+        console.log("i released the up key");
+    }
+    //right
+    else if (keyReleased == 39) {
+        console.log("I released right key");
+    }
+    //down
+    else if (keyReleased == 40) {
+        console.log("I released down key");
+    }
 
 });
 
