@@ -31,10 +31,15 @@
         }
 
         .headerPad {
-            padding: 2%;
-            padding-left: 10%;
+            /* padding: 2%; */
+            /* padding-left: 10%; */
             border: 1px black solid;
             width: 100%;
+            padding-right: 0;
+        }
+
+        .col-lg-1 {
+            padding-right: 0;
         }
     </style>
 </head>
@@ -43,12 +48,12 @@
     <header class="headerPad">Please dont break game</header>
     <main>
         <div class="row">
-            <div class="col-lg-1 col-md-2 col-xs-2">Column for Controls
+            <div class="col-lg-1">Column for Controls
             </div>
             <div class="col-lg-10 canvasWH">
                 <canvas></canvas>
             </div>
-            <div class="col-lg-1 col-md-0 col-xs-0">a column for extra spacing
+            <div class="col-lg-1">a column <br> for <br> extra spacing
             </div>
         </div>
     </main>
