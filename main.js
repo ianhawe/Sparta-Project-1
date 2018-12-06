@@ -68,17 +68,30 @@ window.onload = function () {
     //=====================================================================================//===================================================
     let xx = 10;
     let yy = 60;
+    let wwidth = 10;
+    let hheight = 10;
     function animate() {
         requestAnimationFrame(animate);
         c.clearRect(0, 0, maxCW, maxCH); // Refresh page
         linePosition();
         sq();
+
         for (let i = 0; i < circleArray.length; i++) {
-            if (getDistance(circleArray[i].x, circleArray[i].y, sq.width, sq.height) < circleArray[i].radius + sq.height * 2) {
-                // circleAr
-                alert("Square has touched ball");
-                console.log("why this no touch???");
+            console.log(i);
+            //Detecting between two circles
+            if (getDistance(circleArray[0].x, circleArray[0].y, circleArray[1].x, circleArray[1].y) < circleArray[0].radius + circleArray[1].radius - 2) {
+                circleArray[0].color = "red";
+                // alert("circles touched");
             }
+            else {
+                circleArray[0].color = "blue";
+            }
+
+            // if (getDistance(circleArray[0].x, circleArray[0].y, sq.width, sq.height) < circleArray[0].radius + sq.height * 2) {
+            //     // circleAr
+            //     alert("Square has touched ball!!!@!£!@£");
+            //     console.log("why this no touch???!?@!?@?");
+            // }
             circleArray[i].update();
         }
     }
@@ -135,9 +148,14 @@ window.onload = function () {
         c.stroke();
     }
 
+
+    // let xx = 10;
+    // let yy = 60;
+    // let wwidth = 10;
+    // let hheight = 10;
     function sq() {
-        let width = 10;
-        let height = 10;
+        this.width = wwidth;
+        this.height = hheight;
         c.fillStyle = 'rgba(255, 0, 0, 0.5)';
         c.fillRect(xx, yy, width, height);
 
@@ -289,3 +307,9 @@ window.onload = function () {
         // }
 
         //console.log("Two Squares touching"); //square1 x square1 y square2 x, square2 x
+
+        //  if (getDistance(circleArray[i].x, circleArray[i].y, sq.width, sq.height) < circleArray[i].radius + sq.height * 2) {
+        //         // circleAr
+        //         alert("Square has touched ball");
+        //         console.log("why this no touch???");
+        //     }
