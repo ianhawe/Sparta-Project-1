@@ -159,12 +159,12 @@ window.onload = function () {
             c.fillRect(xx, yy, width, height);
         }
         if (yy <= 0) {
-            yy = 0;
+            yy = maxCH - height;
             clearRect();
             c.fillRect(xx, yy, width, height);
         }
         if (yy >= 150) {
-            yy = height;
+            yy = height - 9;
             clearRect();
             c.fillRect(xx, yy, width, height);
         }
