@@ -28,13 +28,14 @@ window.onload = function () {
             c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
             c.fillStyle = this.color;
             c.fill();
+            //Parse values through to Puthagorean therom
             getDistance(this.x, this.y, xx, yy, this.radius);
         }
         this.update = function () {
+            //Collisions
             if (this.x + this.radius > maxCW - 28 || this.x - this.radius < 40) {
                 this.dx = -this.dx;
             }
-            //Collision fun Y
             if (this.y + this.radius > maxCH || this.y - this.radius < 0) {
                 this.dy = -this.dy;
             }
@@ -43,6 +44,7 @@ window.onload = function () {
             this.draw();
         }
     }
+    //Adjust Amount/speed/size/starting-position of circles
     const circleArray = [];
     function initCircle() {
         for (let i = 0; i < Math.random() * 20 + 1; i++) {
@@ -54,6 +56,7 @@ window.onload = function () {
             circleArray.push(new Circle(x, y, dx, dy, radius));
         }
     }
+    //Pythagorean theorem
     function getDistance(x1, y1, x2, y2, radius) {
         let xDistance = x2 - x1;
         let yDistance = y2 - y1;
@@ -67,7 +70,6 @@ window.onload = function () {
         c.clearRect(0, 0, maxCW, maxCH); // Refresh page
         linePosition();
         sq(xx, yy, 10, 10);
-
         for (let i = 0; i < circleArray.length; i++) {
             circleArray[i].update();
         }
@@ -117,6 +119,7 @@ window.onload = function () {
         c.lineTo(272, maxCH);
         c.stroke();
     }
+    //Player + Player Collisions with Environment
     function sq(xx, yy, width, height) {
         this.width = wwidth;
         this.height = hheight;
@@ -126,10 +129,9 @@ window.onload = function () {
         c.fillRect(xx, yy, width, height);
         c.stroke();
         if (xx > 290) {
-            xx = maxCW - width - 10;
+            xx = 290 - 10;
             c.clearRect();
             c.fillRect(xx, yy, width, height);
-
         }
         if (xx <= 0) {
             xx = 0;
@@ -145,7 +147,7 @@ window.onload = function () {
             yy = maxCH - 15;
             c.fillRect(xx, yy, width, height);
         }
-        if (xx >= 280 && yy >= 120) {
+        if (xx > 270 && yy > 120) {
             location.reload();
         }
     }
@@ -157,28 +159,24 @@ window.onload = function () {
                 c.clearRect(0, 0, maxCW, maxCH);
                 xx = xx - 0.2;
                 c.fillRect(xx, yy, 20, 20);
-                this.console.log("I am left");
             }
             //up
             else if (keyPressed == 38) {
                 c.clearRect(0, 0, maxCW, maxCH);
                 yy = yy - 0.2;
                 c.fillRect(xx, yy, 20, 20);
-                this.console.log("I am up");
             }
             //right
             else if (keyPressed == 39) {
                 c.clearRect(0, 0, maxCW, maxCH);
                 xx = xx + 0.2;
                 c.fillRect(xx, yy, 20, 20);
-                this.console.log("I am right");
             }
             //down
             else if (keyPressed == 40) {
                 c.clearRect(0, 0, maxCW, maxCH);
                 yy = yy + 0.2;
                 c.fillRect(xx, yy, 20, 20);
-                this.console.log("i am down!");
             }
             return (xx, yy)
         });
