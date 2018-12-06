@@ -3,7 +3,7 @@ window.onload = function () {
     const c = canvas.getContext('2d');
     const maxCW = 300;
     const maxCH = 150;
-
+    window.addEventListener('keydown', moveIt, true);
 
     let colorArray = [
         '#F0F7EE',
@@ -72,18 +72,21 @@ window.onload = function () {
         requestAnimationFrame(animate);
         c.clearRect(0, 0, maxCW, maxCH); // Refresh page
         linePosition();
-        window.addEventListener('keydown', moveIt, true);
-        c.fillStyle = 'rgba(255, 0, 0, 0.5)';
-        c.fillRect(xx, yy, 20, 20);
+
         for (let i = 0; i < circleArray.length; i++) {
             circleArray[i].update();
         }
-
+        sq();
         //Detecting between two circles
         if (getDistance(circleArray[0].x, circleArray[0].y, circleArray[1].x, circleArray[1].y) < circleArray[0].radius + circleArray[1].radius - 2) {
-            circleArray[0].color = 'red';
+
+            circleArray[0].color = "red";
             // alert("circles touched");
         }
+        else {
+            circleArray[0].color = "blue";
+        }
+
         //console.log("Two Squares touching"); //square1 x square1 y square2 x, square2 x
     }
     initCircle();
@@ -139,13 +142,54 @@ window.onload = function () {
         c.stroke();
     }
 
+    function sq() {
+        let width = 10;
+        let height = 10;
+        c.fillStyle = 'rgba(255, 0, 0, 0.5)';
+        c.fillRect(xx, yy, width, height);
+
+        if (xx >= 270) {
+            xx = maxCW - width;
+            c.clearRect();
+            c.fillRect(xx, yy, width, height);
+        }
+        if (xx <= 0) {
+            xx = 0;
+            clearRect();
+            c.fillRect(xx, yy, width, height);
+        }
+        if (yy <= 0) {
+            yy = 0;
+            clearRect();
+            c.fillRect(xx, yy, width, height);
+        }
+        if (yy >= 150) {
+            yy = height;
+            clearRect();
+            c.fillRect(xx, yy, width, height);
+        }
+        if (xx <= 0 && yy <= 0) {
+            c.clearRect();
+            c.fillRect(xx, yy, width, height);
+        }
+
+    }
+    //     if (xx + width > maxCW) {
+    //         c.fillStyle = 'rgb(0,255,0)';
+    //     }
+    //     //Do some function stop it from breaking game
+    // }
+    // if (yy + height > maxCH) {
+    //     //Do some function to stop it from going off screen
+    // }
+
     function moveIt(e) {
         addEventListener("keydown", function (e) {
             let keyPressed = e.keyCode || e.which;
             //left
             if (keyPressed == 37) {
                 c.clearRect(0, 0, maxCW, maxCH);
-                xx = xx - 1.4;
+                xx = xx - 0.5;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("I am left");
 
@@ -153,7 +197,7 @@ window.onload = function () {
             //up
             else if (keyPressed == 38) {
                 c.clearRect(0, 0, maxCW, maxCH);
-                yy = yy - 1.4;
+                yy = yy - 0.5;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("I am up");
 
@@ -161,7 +205,7 @@ window.onload = function () {
             //right
             else if (keyPressed == 39) {
                 c.clearRect(0, 0, maxCW, maxCH);
-                xx = xx + 1.4;
+                xx = xx + 0.5;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("I am right");
 
@@ -169,7 +213,7 @@ window.onload = function () {
             //down
             else if (keyPressed == 40) {
                 c.clearRect(0, 0, maxCW, maxCH);
-                yy = yy + 1.4;
+                yy = yy + 0.5;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("i am down!");
 
