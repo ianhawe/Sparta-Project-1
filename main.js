@@ -49,13 +49,13 @@ window.onload = function () {
 
     const circleArray = [];
     function initCircle() {
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 8; i++) {
             let radius = Math.random() * 10 + 1;  // Get a random 0-3 then add 1
             //var x = 40 + Math.random() * (maxCW - radius * 1) + radius;
-            let x = Math.round(Math.random() * 220) + radius + 40; // between two numbers 40 - 272 
-            let y = Math.round(Math.random() * maxCH - 30 - radius) + 20;
-            let dx = Math.random() - 0.5 * 6; // Velocity which is the amount of pixels per movement
-            let dy = Math.random() - 0.5 * 6;
+            let x = 260; // between two numbers 40 - 272 
+            let y = 130
+            let dx = Math.random() - 0.5 * 2; // Velocity which is the amount of pixels per movement
+            let dy = Math.random() - 0.5 * 2;
             circleArray.push(new Circle(x, y, dx, dy, radius));
         }
     }
@@ -72,22 +72,15 @@ window.onload = function () {
         requestAnimationFrame(animate);
         c.clearRect(0, 0, maxCW, maxCH); // Refresh page
         linePosition();
-
+        sq();
         for (let i = 0; i < circleArray.length; i++) {
+            if (getDistance(circleArray[i].x, circleArray[i].y, sq.width, sq.height) < circleArray[i].radius + sq.height * 2) {
+                // circleAr
+                alert("Square has touched ball");
+                console.log("why this no touch???");
+            }
             circleArray[i].update();
         }
-        sq();
-        //Detecting between two circles
-        if (getDistance(circleArray[0].x, circleArray[0].y, circleArray[1].x, circleArray[1].y) < circleArray[0].radius + circleArray[1].radius - 2) {
-
-            circleArray[0].color = "red";
-            // alert("circles touched");
-        }
-        else {
-            circleArray[0].color = "blue";
-        }
-
-        //console.log("Two Squares touching"); //square1 x square1 y square2 x, square2 x
     }
     initCircle();
     animate();
@@ -159,20 +152,28 @@ window.onload = function () {
             c.fillRect(xx, yy, width, height);
         }
         if (yy <= 0) {
-            yy = maxCH - height;
+            yy = maxCH - height; // height-9 = block side
             clearRect();
             c.fillRect(xx, yy, width, height);
         }
         if (yy >= 150) {
-            yy = height - 9;
+            yy = height - 9; // 150 -9
             clearRect();
             c.fillRect(xx, yy, width, height);
         }
 
         if (xx >= 280 && yy >= 120) {
-            console.log("you win");
+            // clearRect(0, 0, maxCW, maxCH);
+            // window.cancelAnimationFrame();
 
+            console.log("point reached");
+            //   c.clearRect(0, 0, canvas.width, canvas.height);
+            //   c.cancelAnimationFrame(animate);
+
+            location.reload();
+            // cancelAnimationFrame(animate);
         }
+
 
 
 
@@ -221,6 +222,53 @@ window.onload = function () {
                 this.console.log("i am down!");
 
             }
+            ////////////////////////
+            //left up
+            else if (keyPressed == 37 && keyPressed == 38) {
+                c.clearRect(0, 0, maxCW, maxCH);
+                xx = xx - 0.2;
+                yy = yy - 0.2;
+                c.fill(xx, yy, 20, 20);
+            }
+            //left down
+            else if (keyPressed == 37 && keyPressed == 40) {
+                c.clearRect(0, 0, maxCW, maxCH);
+                xx = xx - 0.2
+                yy = yy + 0.2
+                c.fill(xx, yy, 20, 20);
+            }
+            //right up
+            else if (keyPressed == 39 && keyPressed == 38) {
+                c.clearRect(0, 0, maxCW, maxCH);
+                xx = xx + 0.2;
+                yy = yy + 0.2;
+                c.fill(xx, yy, 20, 20);
+            }
+            //right down
+            else if (keyPressed == 39 && keyPressed == 40) {
+                c.clearRect(0, 0, maxCW, maxCH);
+                xx = xx + 0.2;
+                yy = yy + 0.2;
+                c.fill(xx, yy, 20, 20);
+            }
+            //up and down
+            else if (keyPressed == 38 && keyPressed == 40) {
+                c.clearRect(0, 0, maxCW, maxCH);
+                yy = yy;
+                c.fill(xx, yy, 20, 20);
+            }
+            //left right
+            else if (keyPressed == 37 && keyPressed == 39) {
+                xx = xx;
+                c.fill(xx, yy, 20, 20);
+            }
+
+            //left + up
+            //left down
+            //left right
+            //right up
+            //right down
+            //down up
             //https://www.youtube.com/watch?v=8ZPlNOzLrdw
             // Extra Combitions of the keys pressed
             //up + down, left + right, up+left, up+right, down+left, down+right
@@ -229,3 +277,15 @@ window.onload = function () {
     }
 
 }
+
+
+ //Detecting between two circles
+        // if (getDistance(circleArray[0].x, circleArray[0].y, circleArray[1].x, circleArray[1].y) < circleArray[0].radius + circleArray[1].radius - 2) {
+        //     circleArray[0].color = "red";
+        //     // alert("circles touched");
+        // }
+        // else {
+        //     circleArray[0].color = "blue";
+        // }
+
+        //console.log("Two Squares touching"); //square1 x square1 y square2 x, square2 x
