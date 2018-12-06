@@ -74,24 +74,15 @@ window.onload = function () {
         requestAnimationFrame(animate);
         c.clearRect(0, 0, maxCW, maxCH); // Refresh page
         linePosition();
-        sq();
+        sq(xx, yy, 10, 10);
 
         for (let i = 0; i < circleArray.length; i++) {
-            console.log(i);
-            //Detecting between two circles
-            if (getDistance(circleArray[0].x, circleArray[0].y, circleArray[1].x, circleArray[1].y) < circleArray[0].radius + circleArray[1].radius - 2) {
-                circleArray[0].color = "red";
-                // alert("circles touched");
-            }
-            else {
-                circleArray[0].color = "blue";
-            }
 
-            // if (getDistance(circleArray[0].x, circleArray[0].y, sq.width, sq.height) < circleArray[0].radius + sq.height * 2) {
-            //     // circleAr
-            //     alert("Square has touched ball!!!@!£!@£");
-            //     console.log("why this no touch???!?@!?@?");
-            // }
+            if (getDistance(circleArray[i].x, circleArray[i].y, sq.width, sq.height) > circleArray[i].radius + sq.height * 2) {
+                // circleAr
+                alert("Square has touched ball!!!@!£!@£");
+                console.log("why this no touch???!?@!?@?");
+            }
             circleArray[i].update();
         }
     }
@@ -153,9 +144,11 @@ window.onload = function () {
     // let yy = 60;
     // let wwidth = 10;
     // let hheight = 10;
-    function sq() {
+    function sq(xx, yy, width, height) {
         this.width = wwidth;
         this.height = hheight;
+        this.xx = xx;
+        this.yy = yy;
         c.fillStyle = 'rgba(255, 0, 0, 0.5)';
         c.fillRect(xx, yy, width, height);
 
