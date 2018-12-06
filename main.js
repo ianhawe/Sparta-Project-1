@@ -1,3 +1,4 @@
+
 window.onload = function () {
     let canvas = document.querySelector('canvas');
     const c = canvas.getContext('2d');
@@ -6,11 +7,10 @@ window.onload = function () {
     window.addEventListener('keydown', moveIt, true);
 
     let colorArray = [
-        '#F0F7EE',
-        '#C4D7F2',
-        '#AFDEDC',
-        '#91A8A4',
-        '#000000'
+        '#3BB273',
+        '#7768AE',
+        '#E1BC29',
+        '#4D9DE0',
     ];
     let controller;
 
@@ -23,14 +23,15 @@ window.onload = function () {
         this.dy = dy;
         this.radius = radius;
         this.color = colorArray[Math.floor(Math.random() * colorArray.length)];
-
         this.draw = function () {
             c.beginPath();
             c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-            //c.strokeStyle = "red";
+            // c.strokeStyle = "black";
+            // c.stroke();
             c.fillStyle = this.color;
             c.fill();
-
+            //Parse to getDistance
+            getDistance(this.x, this.y, xx, yy, this.radius);
         } // close draw function
         this.update = function () {
             if (this.x + this.radius > maxCW - 28 || this.x - this.radius < 40) {
@@ -49,7 +50,7 @@ window.onload = function () {
 
     const circleArray = [];
     function initCircle() {
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < Math.random() * 20 + 1; i++) {
             let radius = Math.random() * 10 + 1;  // Get a random 0-3 then add 1
             //var x = 40 + Math.random() * (maxCW - radius * 1) + radius;
             let x = 260; // between two numbers 40 - 272 
@@ -60,9 +61,13 @@ window.onload = function () {
         }
     }
 
-    function getDistance(x1, y1, x2, y2) {
+    function getDistance(x1, y1, x2, y2, radius) {
         let xDistance = x2 - x1;
         let yDistance = y2 - y1;
+        if (Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2)) < 10 + radius) {
+            location.reload()
+
+        }
         return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
     }
     //=====================================================================================//===================================================
@@ -78,11 +83,22 @@ window.onload = function () {
 
         for (let i = 0; i < circleArray.length; i++) {
 
-            if (getDistance(circleArray[i].x, circleArray[i].y, sq.width, sq.height) > circleArray[i].radius + sq.height * 2) {
-                // circleAr
-                alert("Square has touched ball!!!@!£!@£");
-                console.log("why this no touch???!?@!?@?");
-            }
+            // if (getDistance(circleArray[i].x, circleArray[i].y, xx, yy) < circleArray[i].radius + sq.height) {
+            //     // circleAr
+            //     //     alert("Square has touched ball!!!@!£!@£");
+            //     //     console.log("why this no touch???!?@!?@?");
+            //     // }
+            //     // if (getDistance(circleArray[i].x, circleArray[i].y, circleArray[i + 1].x, circleArray[i + 1].y) < circleArray[i].radius + circleArray[i + 1].radius - 2) {
+            //     //     circleArray[i].color = "red";
+            //     // circleArray[i].dx = (-circleArray[i]) * 1.1;
+            //     console.log("hello")
+            //     // ball.dx = (-ball.dx - 10) * 1.1;
+            //     // player1.dx = -player1.dx + 2
+            //     // alert("circles touched");
+            // }
+            // else {
+            //     circleArray[i].color = "blue";
+            // }
             circleArray[i].update();
         }
     }
@@ -96,46 +112,48 @@ window.onload = function () {
         //Start Square Position (Random)
 
         //End Square Position Doesn't need to move
-        c.fillStyle = 'rgba(0, 0, 255, 0.5)';
+        c.fillStyle = '#E1BC29';
         c.fillRect(275, 120, 20, 20);
+        //c.strokeStyle = "black";
+        c.stroke();
 
         c.beginPath();
         c.moveTo(0, maxCH);
         c.lineTo(0, 0);
-        c.strokeStyle = "yellow"
+        c.strokeStyle = "black"
         c.stroke();
 
         c.beginPath();
         c.moveTo(maxCW, 0);
         c.lineTo(maxCW, maxCH);
-        c.strokeStyle = "yellow"
+        c.strokeStyle = "black"
         c.stroke();
 
         //horizontal up, down
         c.beginPath();
         c.moveTo(0, 0);
         c.lineTo(maxCW, 0);
-        c.strokeStyle = "yellow"
+        c.strokeStyle = "black"
         c.stroke();
 
         c.beginPath();
         c.moveTo(0, maxCH);
         c.lineTo(maxCW, maxCH);
-        c.strokeStyle = "yellow"
+        c.strokeStyle = "black"
         c.stroke();
 
         //Start Line
         c.beginPath();
         c.moveTo(40, 149);
         c.lineTo(40, 0);
-        c.strokeStyle = "#00ff00"
+        c.strokeStyle = "#E1BC29"
         c.stroke();
 
-        //Left
+        //right
         c.beginPath();
         c.moveTo(272, 0);
         c.lineTo(272, maxCH);
-        c.strokeStyle = "orange"
+        //c.strokeStyle = "red"
         c.stroke();
     }
 
@@ -149,13 +167,14 @@ window.onload = function () {
         this.height = hheight;
         this.xx = xx;
         this.yy = yy;
-        c.fillStyle = 'rgba(255, 0, 0, 0.5)';
+        c.fillStyle = '#E1BC29';
         c.fillRect(xx, yy, width, height);
-
+        c.stroke();
         if (xx > 290) {
             xx = maxCW - width - 10;
             c.clearRect();
             c.fillRect(xx, yy, width, height);
+
         }
         if (xx <= 0) {
             xx = 0;
@@ -184,10 +203,6 @@ window.onload = function () {
             location.reload();
             // cancelAnimationFrame(animate);
         }
-
-
-
-
     }
     //     if (xx + width > maxCW) {
     //         c.fillStyle = 'rgb(0,255,0)';
@@ -207,7 +222,6 @@ window.onload = function () {
                 xx = xx - 0.2;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("I am left");
-
             }
             //up
             else if (keyPressed == 38) {
@@ -215,7 +229,6 @@ window.onload = function () {
                 yy = yy - 0.2;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("I am up");
-
             }
             //right
             else if (keyPressed == 39) {
@@ -223,7 +236,6 @@ window.onload = function () {
                 xx = xx + 0.2;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("I am right");
-
             }
             //down
             else if (keyPressed == 40) {
@@ -231,59 +243,7 @@ window.onload = function () {
                 yy = yy + 0.2;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("i am down!");
-
             }
-            ////////////////////////
-            //left up
-            else if (keyPressed == 37 && keyPressed == 38) {
-                c.clearRect(0, 0, maxCW, maxCH);
-                xx = xx - 0.2;
-                yy = yy - 0.2;
-                c.fill(xx, yy, 20, 20);
-            }
-            //left down
-            else if (keyPressed == 37 && keyPressed == 40) {
-                c.clearRect(0, 0, maxCW, maxCH);
-                xx = xx - 0.2
-                yy = yy + 0.2
-                c.fill(xx, yy, 20, 20);
-            }
-            //right up
-            else if (keyPressed == 39 && keyPressed == 38) {
-                c.clearRect(0, 0, maxCW, maxCH);
-                xx = xx + 0.2;
-                yy = yy + 0.2;
-                c.fill(xx, yy, 20, 20);
-            }
-            //right down
-            else if (keyPressed == 39 && keyPressed == 40) {
-                c.clearRect(0, 0, maxCW, maxCH);
-                xx = xx + 0.2;
-                yy = yy + 0.2;
-                c.fill(xx, yy, 20, 20);
-            }
-            //up and down
-            else if (keyPressed == 38 && keyPressed == 40) {
-                c.clearRect(0, 0, maxCW, maxCH);
-                yy = yy;
-                c.fill(xx, yy, 20, 20);
-            }
-            //left right
-            else if (keyPressed == 37 && keyPressed == 39) {
-                xx = xx;
-                c.fill(xx, yy, 20, 20);
-            }
-
-            //left + up
-            //left down
-            //left right
-            //right up
-            //right down
-            //down up
-            //https://www.youtube.com/watch?v=8ZPlNOzLrdw
-            // Extra Combitions of the keys pressed
-            //up + down, left + right, up+left, up+right, down+left, down+right
-
         });
     }
 

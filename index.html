@@ -21,30 +21,50 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <style>
+        * {
+            background-color: #4D9DE0;
+            color: #E1BC29;
+        }
+
+        footer {
+            text-align: center;
+        }
+
         canvas {
-            background-color: grey;
+            background-color: #E15554;
             border: 1px black solid;
             width: 100%;
             height: 100%;
-            margin-top: 5%;
-            margin-bottom: 5%;
+
         }
 
         .headerPad {
             /* padding: 2%; */
             /* padding-left: 10%; */
-            border: 1px black solid;
             width: 100%;
             padding-right: 0;
+            padding-bottom: 4px;
+        }
+
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .headerPad {
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <header class="headerPad">Please dont break game</header>
+    <header class="headerPad">
+        <h1> Odyssey </h1>
+    </header>
     <main>
         <div class="row">
-            <div class="col-lg-1">Column for Controls
+            <div class="col-lg-1"> <br><br><br> <b>Controls</b> <br> <br>
+                Use the arrow keys to control your square. <br> Good luck making it across!
             </div>
             <div class="col-lg-10 canvasWH">
                 <canvas></canvas>
@@ -52,17 +72,11 @@
             </div>
     </main>
     <footer>
-        <div class="row">
-            <div class="col-lg-4">
-            </div>
-            <div class="col-lg-4">
-                Created by: Ian Hawe <br>
-                GitHub Link: <br>
-                LinkedIn:
-            </div>
-            <div class="col-lg-3">
-            </div>
-        </div>
+
+        Created by: Ian Hawe <br>
+        GitHub Link: https://github.com/ianhawe<br>
+
+
     </footer>
 
     <!-- This HTML of the project will hold:
@@ -79,7 +93,7 @@
  -->
 
 
-    <script src="blah.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>
