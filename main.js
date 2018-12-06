@@ -100,7 +100,7 @@ window.onload = function () {
 
         //End Square Position Doesn't need to move
         c.fillStyle = 'rgba(0, 0, 255, 0.5)';
-        c.fillRect(275, 60, 20, 20);
+        c.fillRect(275, 120, 20, 20);
 
         c.beginPath();
         c.moveTo(0, maxCH);
@@ -148,8 +148,8 @@ window.onload = function () {
         c.fillStyle = 'rgba(255, 0, 0, 0.5)';
         c.fillRect(xx, yy, width, height);
 
-        if (xx >= 270) {
-            xx = maxCW - width;
+        if (xx > 290) {
+            xx = maxCW - width - 10;
             c.clearRect();
             c.fillRect(xx, yy, width, height);
         }
@@ -168,10 +168,13 @@ window.onload = function () {
             clearRect();
             c.fillRect(xx, yy, width, height);
         }
-        if (xx <= 0 && yy <= 0) {
-            c.clearRect();
-            c.fillRect(xx, yy, width, height);
+
+        if (xx >= 280 && yy >= 120) {
+            console.log("you win");
+
         }
+
+
 
     }
     //     if (xx + width > maxCW) {
@@ -189,7 +192,7 @@ window.onload = function () {
             //left
             if (keyPressed == 37) {
                 c.clearRect(0, 0, maxCW, maxCH);
-                xx = xx - 0.5;
+                xx = xx - 0.2;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("I am left");
 
@@ -197,7 +200,7 @@ window.onload = function () {
             //up
             else if (keyPressed == 38) {
                 c.clearRect(0, 0, maxCW, maxCH);
-                yy = yy - 0.5;
+                yy = yy - 0.2;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("I am up");
 
@@ -205,7 +208,7 @@ window.onload = function () {
             //right
             else if (keyPressed == 39) {
                 c.clearRect(0, 0, maxCW, maxCH);
-                xx = xx + 0.5;
+                xx = xx + 0.2;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("I am right");
 
@@ -213,7 +216,7 @@ window.onload = function () {
             //down
             else if (keyPressed == 40) {
                 c.clearRect(0, 0, maxCW, maxCH);
-                yy = yy + 0.5;
+                yy = yy + 0.2;
                 c.fillRect(xx, yy, 20, 20);
                 this.console.log("i am down!");
 
