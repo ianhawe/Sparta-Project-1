@@ -26,6 +26,6 @@ Sparta-Project-1, is a JavaScript based game, using canvas. Whilst formating wit
 2. Collision detection - This was what my main problem was, this was both for player, and balls which bounce around. This also included the finish line.
 
 ### Learning points
-1. A better nderstanding of JavaScript
-2. Understanding of collision between objects 
-3. A Better understanding of event listeners in JavaScript
+1. A better nderstanding of JavaScript.
+2. Understanding of collision between objects. 
+3. A Better understanding of event listeners in JavaScript.
