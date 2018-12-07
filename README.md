@@ -9,9 +9,8 @@ Sparta-Project-1, is a JavaScript based game, using canvas. Whilst formating wit
 
 ### How to download
 1. To download a copy click on 'clone or download' and you can download it as a zip file.
-2. Once that is done, 
-3. Unzip the file
-4. Open up the file index.html
+2. Unzip the file
+3. Open up the file index.html
 
 # Alternative
 1. If you choose to clone it go into your terminal.
