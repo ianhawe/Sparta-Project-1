@@ -83,7 +83,7 @@ window.onload = function () {
         c.fillStyle = '#E1BC29';
         c.fillRect(275, 120, 20, 20);
         c.stroke();
-        //left border
+
         c.beginPath();
         c.moveTo(0, maxCH);
         c.lineTo(0, 0);
@@ -96,7 +96,6 @@ window.onload = function () {
         c.strokeStyle = "black"
         c.stroke();
 
-        //horizontal up, down
         c.beginPath();
         c.moveTo(0, 0);
         c.lineTo(maxCW, 0);
@@ -109,14 +108,12 @@ window.onload = function () {
         c.strokeStyle = "black"
         c.stroke();
 
-        //Start Line
         c.beginPath();
         c.moveTo(40, 149);
         c.lineTo(40, 0);
         c.strokeStyle = "#E1BC29"
         c.stroke();
 
-        //right
         c.beginPath();
         c.moveTo(272, 0);
         c.lineTo(272, maxCH);
