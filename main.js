@@ -130,17 +130,14 @@ window.onload = function () {
         c.stroke();
         if (xx > 300) {
             xx = 290 - 10;
-            //c.clearRect();
             c.fillRect(xx, yy, width, height);
         }
         if (xx < 12) {
             xx = 12;
-            //clearRect();
             c.fillRect(xx, yy, width, height);
         }
         if (yy < 12) {
-            yy = height - 9; // height-9 = block side
-            // clearRect();
+            yy = height - 9;
             c.fillRect(xx, yy, width, height);
         }
         if (yy > maxCH - 10) {
@@ -151,6 +148,7 @@ window.onload = function () {
             location.reload();
         }
     }
+    //Event Listener for arrow keys
     function moveIt(e) {
         addEventListener("keydown", function (e) {
             let keyPressed = e.keyCode || e.which;
