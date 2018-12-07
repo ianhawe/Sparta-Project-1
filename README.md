@@ -12,6 +12,8 @@ Sparta-Project-1, is a JavaScript based game, using canvas. Whilst formating wit
 2. Unzip the file
 3. Open up the file index.html
 
+### You can view the page [https://ianhawe.github.io/Sparta-Project-1/]()
+
 # Alternative
 1. If you choose to clone it go into your terminal.
 2. Create a directory
