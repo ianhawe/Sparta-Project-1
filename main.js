@@ -28,7 +28,7 @@ window.onload = function () {
             c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
             c.fillStyle = this.color;
             c.fill();
-            //Parse values through to Puthagorean therom
+            //Parse values through to Pythagorean therom
             getDistance(this.x, this.y, xx, yy, this.radius);
         }
         this.update = function () {
@@ -47,7 +47,7 @@ window.onload = function () {
     //Adjust Amount/speed/size/starting-position of circles
     const circleArray = [];
     function initCircle() {
-        for (let i = 0; i < Math.random() * 20 + 1; i++) {
+        for (let i = 0; i < 10; i++) {
             let radius = Math.random() * 10 + 1;
             let x = 260;
             let y = 130
@@ -128,19 +128,19 @@ window.onload = function () {
         c.fillStyle = '#E1BC29';
         c.fillRect(xx, yy, width, height);
         c.stroke();
-        if (xx > 290) {
+        if (xx > 300) {
             xx = 290 - 10;
-            c.clearRect();
+            //c.clearRect();
             c.fillRect(xx, yy, width, height);
         }
-        if (xx <= 0) {
-            xx = 0;
-            clearRect();
+        if (xx < 12) {
+            xx = 12;
+            //clearRect();
             c.fillRect(xx, yy, width, height);
         }
-        if (yy < 2) {
-            yy = 10; // height-9 = block side
-            clearRect();
+        if (yy < 12) {
+            yy = height - 9; // height-9 = block side
+            // clearRect();
             c.fillRect(xx, yy, width, height);
         }
         if (yy > maxCH - 10) {
